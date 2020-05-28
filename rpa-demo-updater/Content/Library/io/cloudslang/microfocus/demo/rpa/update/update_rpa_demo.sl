@@ -27,7 +27,7 @@ flow:
           - read_text
         navigate:
           - SUCCESS: 2020_05_28_applied
-          - FAILURE: on_failure
+          - FAILURE: update_2020_05_08
     - add_text_to_file:
         do:
           io.cloudslang.base.filesystem.add_text_to_file:
@@ -66,8 +66,8 @@ extensions:
   graph:
     steps:
       read_from_file:
-        x: 125
-        'y': 64
+        x: 130
+        'y': 54
       add_text_to_file:
         x: 558
         'y': 423
