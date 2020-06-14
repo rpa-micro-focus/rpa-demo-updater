@@ -57,7 +57,7 @@ flow:
             - status: '${status}'
             - force: '${force}'
         publish:
-          - retries: '5'
+          - retries: '10'
         navigate:
           - FAILURE: on_failure
           - SUCCESS: _get_status
