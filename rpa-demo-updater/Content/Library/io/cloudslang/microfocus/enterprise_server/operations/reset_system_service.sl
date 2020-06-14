@@ -31,7 +31,7 @@ flow:
     - sleep:
         do:
           io.cloudslang.base.utils.sleep:
-            - seconds: "${'0' if wait_time is None else wait_time}"
+            - seconds: "${get('wait_time', '0')}"
         navigate:
           - SUCCESS: SUCCESS
           - FAILURE: on_failure
