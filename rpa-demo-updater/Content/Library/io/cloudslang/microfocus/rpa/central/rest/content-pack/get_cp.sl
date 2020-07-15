@@ -1,6 +1,10 @@
 ########################################################################################################################
 #!!
-#! @description: Retrieves CP details based on the CP name. It fails if none such CP is found.
+#! @description: Retrieves CP details based on the CP name. It returns empty cp_id and cp_version if no CP found.
+#!
+#! @output cp_json: [] if no CP found
+#! @output cp_id: Empty if no CP found
+#! @output cp_version: Empty if no CP found
 #!!#
 ########################################################################################################################
 namespace: io.cloudslang.microfocus.rpa.central.rest.content-pack
@@ -25,8 +29,8 @@ flow:
         publish:
           - cp_json: '${return_result}'
           - cp_pton: '${return_result.replace(":null", ":None")}'
-          - cp_version: "${eval(cp_pton)[0]['version']}"
-          - cp_id: "${eval(cp_pton)[0]['id']}"
+          - cp_version: "${'' if cp_pton == '[]' else eval(cp_pton)[0]['version']}"
+          - cp_id: "${'' if cp_pton == '[]' else eval(cp_pton)[0]['id']}"
         navigate:
           - SUCCESS: SUCCESS
           - FAILURE: on_failure
@@ -40,6 +44,9 @@ flow:
 extensions:
   graph:
     steps:
+      get_cps:
+        x: 87
+        'y': 124
       json_path_query:
         x: 291
         'y': 121
@@ -47,9 +54,6 @@ extensions:
           0cd3767b-b645-8bc2-4594-d8d9316eaf12:
             targetId: a7c5620c-e86b-40fd-7ae4-d33c4d5164df
             port: SUCCESS
-      get_cps:
-        x: 87
-        'y': 124
     results:
       SUCCESS:
         a7c5620c-e86b-40fd-7ae4-d33c4d5164df:
