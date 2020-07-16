@@ -1,6 +1,9 @@
 ########################################################################################################################
 #!!
 #! @description: Downloads and trigger code from GitHub repo that is supposed to update the demo environment. It downloads the latest release of the given GitHub repo.
+#!               TODO:
+#!                 - remove the temp folder once CP deployed
+#!                 - move this implementation to RPA CP
 #!
 #! @input github_repo: GitHub repo containing the updater code
 #! @input updater_flow: Code to be executed once update downloaded
@@ -88,9 +91,9 @@ extensions:
           0aec0ca4-5e41-a5c6-d452-5cbda18b43d0:
             targetId: eb658742-0bca-358f-e12d-9f97d209a3bd
             port: NO_RELEASE
-      get_time:
-        x: 415
-        'y': 105
+      download_update:
+        x: 243
+        'y': 318
       get_temp_file:
         x: 54
         'y': 321
@@ -104,9 +107,9 @@ extensions:
           7ac10a34-ad6a-d21b-d042-ea852ebbc01e:
             targetId: 63e311c2-e859-b248-58b9-bf9844eac74e
             port: SUCCESS
-      download_update:
-        x: 243
-        'y': 318
+      get_time:
+        x: 415
+        'y': 105
     results:
       SUCCESS:
         63e311c2-e859-b248-58b9-bf9844eac74e:
