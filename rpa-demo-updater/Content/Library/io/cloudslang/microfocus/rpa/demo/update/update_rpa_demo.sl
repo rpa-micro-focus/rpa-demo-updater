@@ -11,7 +11,7 @@
 #! @input update_2020_07_15: Update from 2020/07/15
 #!!#
 ########################################################################################################################
-namespace: io.cloudslang.microfocus.demo.rpa.update
+namespace: io.cloudslang.microfocus.rpa.demo.update
 flow:
   name: update_rpa_demo
   inputs:
@@ -46,13 +46,13 @@ flow:
           - 'FALSE': update_2020_05_08
     - update_2020_05_08:
         do:
-          io.cloudslang.microfocus.demo.rpa.update.update_2020_05_08: []
+          io.cloudslang.microfocus.rpa.demo.update.update_2020_05_08: []
         navigate:
           - FAILURE: 2020_06_10_applied
           - SUCCESS: log_2020_05_28
     - log_2020_05_28:
         do:
-          io.cloudslang.microfocus.demo.rpa.update.operations.log_update:
+          io.cloudslang.microfocus.rpa.demo.update._operations.log_update:
             - log_file: '${log_file}'
             - update_message: '${update_2020_05_28}'
         navigate:
@@ -67,13 +67,13 @@ flow:
           - 'FALSE': update_2020_06_10
     - update_2020_06_10:
         do:
-          io.cloudslang.microfocus.demo.rpa.update.update_2020_06_10: []
+          io.cloudslang.microfocus.rpa.demo.update.update_2020_06_10: []
         navigate:
           - FAILURE: 2020_07_15_applied
           - SUCCESS: log_2020_06_10
     - log_2020_06_10:
         do:
-          io.cloudslang.microfocus.demo.rpa.update.operations.log_update:
+          io.cloudslang.microfocus.rpa.demo.update._operations.log_update:
             - log_file: '${log_file}'
             - update_message: '${update_2020_06_10}'
         navigate:
@@ -81,13 +81,13 @@ flow:
           - SUCCESS: 2020_07_15_applied
     - update_2020_07_15:
         do:
-          io.cloudslang.microfocus.demo.rpa.update.update_2020_07_15: []
+          io.cloudslang.microfocus.rpa.demo.update.update_2020_07_15: []
         navigate:
           - FAILURE: SUCCESS
           - SUCCESS: log_2020_07_15
     - log_2020_07_15:
         do:
-          io.cloudslang.microfocus.demo.rpa.update.operations.log_update:
+          io.cloudslang.microfocus.rpa.demo.update._operations.log_update:
             - update_message: '${update_2020_07_15}'
         navigate:
           - FAILURE: on_failure

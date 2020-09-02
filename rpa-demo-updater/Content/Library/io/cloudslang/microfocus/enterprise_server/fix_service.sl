@@ -17,7 +17,7 @@ flow:
   workflow:
     - get_status:
         do:
-          io.cloudslang.microfocus.enterprise_server.operations.get_status:
+          io.cloudslang.microfocus.enterprise_server._operations.get_status:
             - url: '${url}'
         publish:
           - csrf_token
@@ -29,7 +29,7 @@ flow:
           - OTHER: force_status_stop
     - reset_system_service:
         do:
-          io.cloudslang.microfocus.enterprise_server.operations.reset_system_service:
+          io.cloudslang.microfocus.enterprise_server._operations.reset_system_service:
             - service_name: '${service_name}'
             - wait_time: '15'
         navigate:
@@ -37,7 +37,7 @@ flow:
           - SUCCESS: get_status_again
     - set_status_start:
         do:
-          io.cloudslang.microfocus.enterprise_server.operations.set_status:
+          io.cloudslang.microfocus.enterprise_server._operations.set_status:
             - url: '${url}'
             - csrf_token: '${csrf_token}'
             - status: Start
@@ -47,7 +47,7 @@ flow:
           - SUCCESS: SUCCESS
     - force_status_stop:
         do:
-          io.cloudslang.microfocus.enterprise_server.operations.set_status:
+          io.cloudslang.microfocus.enterprise_server._operations.set_status:
             - url: '${url}'
             - csrf_token: '${csrf_token}'
             - status: Stop
@@ -57,7 +57,7 @@ flow:
           - SUCCESS: get_status
     - get_status_again:
         do:
-          io.cloudslang.microfocus.enterprise_server.operations.get_status:
+          io.cloudslang.microfocus.enterprise_server._operations.get_status:
             - url: '${url}'
         navigate:
           - FAILURE: on_failure

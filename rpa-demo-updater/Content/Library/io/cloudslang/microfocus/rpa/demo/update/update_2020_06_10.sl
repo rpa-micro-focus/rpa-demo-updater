@@ -5,7 +5,7 @@
 #!               - stops MF Enterprise Server service
 #!!#
 ########################################################################################################################
-namespace: io.cloudslang.microfocus.demo.rpa.update
+namespace: io.cloudslang.microfocus.rpa.demo.update
 flow:
   name: update_2020_06_10
   inputs:

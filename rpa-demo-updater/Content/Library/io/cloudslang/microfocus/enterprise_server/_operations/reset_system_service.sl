@@ -6,7 +6,7 @@
 #! @input wait_time: How long to wait once service started (do not wait when not given).
 #!!#
 ########################################################################################################################
-namespace: io.cloudslang.microfocus.enterprise_server.operations
+namespace: io.cloudslang.microfocus.enterprise_server._operations
 flow:
   name: reset_system_service
   inputs:

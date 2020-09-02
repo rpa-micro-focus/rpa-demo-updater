@@ -7,7 +7,7 @@
 #! @input force: Force changing the state? Valid only for stopping and should be true / false
 #!!#
 ########################################################################################################################
-namespace: io.cloudslang.microfocus.enterprise_server.operations
+namespace: io.cloudslang.microfocus.enterprise_server._operations
 flow:
   name: set_status
   inputs:
@@ -18,7 +18,7 @@ flow:
   workflow:
     - _set_status:
         do:
-          io.cloudslang.microfocus.enterprise_server.operations.low_level._set_status:
+          io.cloudslang.microfocus.enterprise_server._operations.low_level._set_status:
             - url: '${url}'
             - status: '${status}'
             - csrf_token: '${csrf_token}'
@@ -51,7 +51,7 @@ flow:
           - FAILURE: on_failure
     - _confirm_status:
         do:
-          io.cloudslang.microfocus.enterprise_server.operations.low_level._confirm_status:
+          io.cloudslang.microfocus.enterprise_server._operations.low_level._confirm_status:
             - url: '${url}'
             - csrf_token: '${csrf_token}'
             - status: '${status}'
@@ -63,7 +63,7 @@ flow:
           - SUCCESS: _get_status
     - _get_status:
         do:
-          io.cloudslang.microfocus.enterprise_server.operations.low_level._get_status:
+          io.cloudslang.microfocus.enterprise_server._operations.low_level._get_status:
             - url: '${url}'
         publish:
           - es_status

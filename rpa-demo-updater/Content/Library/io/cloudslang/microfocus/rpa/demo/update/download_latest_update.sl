@@ -10,7 +10,7 @@
 #! @input trigger_expression: When schedule the downloaded update (*/120000 = after two minutes from download)
 #!!#
 ########################################################################################################################
-namespace: io.cloudslang.microfocus.demo.rpa.update
+namespace: io.cloudslang.microfocus.rpa.demo.update
 flow:
   name: download_latest_update
   inputs:
@@ -20,7 +20,7 @@ flow:
   workflow:
     - get_repo_details:
         do:
-          rpa.tools.github.get_repo_details:
+          io.cloudslang.base.github.get_repo_details:
             - owner: '${github_repo.split("/")[0]}'
             - repo: '${github_repo.split("/")[1]}'
         publish:
@@ -51,14 +51,14 @@ flow:
           - SUCCESS: download_update
     - import_cp:
         do:
-          rpa.central.rest.content-pack.import_cp:
+          io.cloudslang.microfocus.rpa.central.content-pack.import_cp:
             - cp_file: '${file_path}'
         navigate:
           - FAILURE: on_failure
           - SUCCESS: get_time
     - schedule_flow:
         do:
-          rpa.central.rest.scheduler.schedule_flow:
+          io.cloudslang.microfocus.rpa.central.scheduler.schedule_flow:
             - name: Updating Demo Content
             - uuid: '${updater_flow}'
             - trigger_expression: '${trigger_expression}'

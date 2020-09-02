@@ -1,4 +1,4 @@
-namespace: io.cloudslang.microfocus.enterprise_server.operations.low_level
+namespace: io.cloudslang.microfocus.enterprise_server._operations.low_level
 flow:
   name: _get_status
   inputs:

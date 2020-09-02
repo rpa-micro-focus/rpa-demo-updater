@@ -5,7 +5,7 @@
 #! @output es_status: Service status (started / stopped / not responding)
 #!!#
 ########################################################################################################################
-namespace: io.cloudslang.microfocus.enterprise_server.operations
+namespace: io.cloudslang.microfocus.enterprise_server._operations
 flow:
   name: get_status
   inputs:
@@ -13,7 +13,7 @@ flow:
   workflow:
     - _get_status:
         do:
-          io.cloudslang.microfocus.enterprise_server.operations.low_level._get_status:
+          io.cloudslang.microfocus.enterprise_server._operations.low_level._get_status:
             - url: '${url}'
         publish:
           - csrf_token

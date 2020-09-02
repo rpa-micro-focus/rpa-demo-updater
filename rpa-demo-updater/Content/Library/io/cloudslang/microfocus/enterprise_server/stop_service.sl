@@ -7,7 +7,7 @@ flow:
   workflow:
     - get_csrf_token:
         do:
-          io.cloudslang.microfocus.enterprise_server.operations.low_level._get_status:
+          io.cloudslang.microfocus.enterprise_server._operations.low_level._get_status:
             - url: '${url}'
         publish:
           - csrf_token
@@ -16,7 +16,7 @@ flow:
           - SUCCESS: set_status
     - set_status:
         do:
-          io.cloudslang.microfocus.enterprise_server.operations.set_status:
+          io.cloudslang.microfocus.enterprise_server._operations.set_status:
             - url: '${url}'
             - csrf_token: '${csrf_token}'
             - status: Stop
