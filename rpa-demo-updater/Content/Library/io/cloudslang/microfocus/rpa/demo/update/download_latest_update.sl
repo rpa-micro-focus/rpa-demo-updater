@@ -42,7 +42,7 @@ flow:
           - FAILURE: on_failure
     - get_temp_file:
         do:
-          rpa.tools.temp.get_temp_file:
+          io.cloudslang.base.filesystem.temp.get_temp_file:
             - file_name: '${release_binary_url.split("/")[-1]}'
         publish:
           - folder_path

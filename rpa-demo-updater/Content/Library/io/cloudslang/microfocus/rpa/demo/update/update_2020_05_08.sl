@@ -22,7 +22,7 @@ flow:
           - FAILURE: generate_roi_numbers
     - generate_roi_numbers:
         do:
-          rpa.demo.generate_roi_numbers:
+          io.cloudslang.microfocus.rpa.demo.generate_roi_numbers:
             - num_of_occurences_range: 1-10
             - roi_range: 5-20
         navigate:
