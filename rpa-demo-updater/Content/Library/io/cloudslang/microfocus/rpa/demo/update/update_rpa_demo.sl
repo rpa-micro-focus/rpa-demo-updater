@@ -46,7 +46,7 @@ flow:
           - 'FALSE': update_2020_05_08
     - update_2020_05_08:
         do:
-          io.cloudslang.microfocus.rpa.demo.update.update_2020_05_08: []
+          io.cloudslang.microfocus.rpa.demo.update.2020_02.update_2020_05_08: []
         navigate:
           - FAILURE: 2020_06_10_applied
           - SUCCESS: log_2020_05_28
@@ -67,7 +67,7 @@ flow:
           - 'FALSE': update_2020_06_10
     - update_2020_06_10:
         do:
-          io.cloudslang.microfocus.rpa.demo.update.update_2020_06_10: []
+          io.cloudslang.microfocus.rpa.demo.update.2020_02.update_2020_06_10: []
         navigate:
           - FAILURE: 2020_07_15_applied
           - SUCCESS: log_2020_06_10
@@ -81,7 +81,7 @@ flow:
           - SUCCESS: 2020_07_15_applied
     - update_2020_07_15:
         do:
-          io.cloudslang.microfocus.rpa.demo.update.update_2020_07_15: []
+          io.cloudslang.microfocus.rpa.demo.update.2020_02.update_2020_07_15: []
         navigate:
           - FAILURE: SUCCESS
           - SUCCESS: log_2020_07_15

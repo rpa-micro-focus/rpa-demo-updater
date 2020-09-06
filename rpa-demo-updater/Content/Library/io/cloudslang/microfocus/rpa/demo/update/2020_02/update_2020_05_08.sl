@@ -5,7 +5,7 @@
 #!                 - generates ROI numbers
 #!!#
 ########################################################################################################################
-namespace: io.cloudslang.microfocus.rpa.demo.update
+namespace: io.cloudslang.microfocus.rpa.demo.update.2020_02
 flow:
   name: update_2020_05_08
   inputs:

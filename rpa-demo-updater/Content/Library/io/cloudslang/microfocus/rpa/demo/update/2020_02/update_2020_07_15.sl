@@ -11,7 +11,7 @@
 #! @input cp_folder: Downloaded CPs will be stored in this folder
 #!!#
 ########################################################################################################################
-namespace: io.cloudslang.microfocus.rpa.demo.update
+namespace: io.cloudslang.microfocus.rpa.demo.update.2020_02
 flow:
   name: update_2020_07_15
   inputs:
