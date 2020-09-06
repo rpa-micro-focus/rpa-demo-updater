@@ -3,8 +3,8 @@
 #! @description: RPA demo environment update from July/15/2020:
 #!               - Downloads newest CPs from GitHub repositories
 #!               - Updates users' workspaces
-#!                 - Pulls changes from GitHub
-#!                 - Updates binaries if present in GitHub
+#!               - Pulls changes from GitHub
+#!               - Updates binaries if present in GitHub
 #!
 #! @input github_repos: Repositories where to download the newest CPs from and deploy them to Central
 #! @input usernames: Usernames whose workspaces to be updated (changes pulled out of GitHub repo; binaries inside of CPs updated if present)
@@ -28,41 +28,20 @@ flow:
               - cp_folder: '${cp_folder}'
           break: []
         navigate:
-          - FAILURE: list_iterator
-          - NOTHING_TO_UPDATE: list_iterator
-          - ALREADY_DEPLOYED: list_iterator
-          - SUCCESS: list_iterator
-    - list_iterator:
-        do:
-          io.cloudslang.base.lists.list_iterator:
-            - list: '${usernames}'
-        publish:
-          - username: '${result_string}'
-        navigate:
-          - HAS_MORE: get_time
-          - NO_MORE: SUCCESS
-          - FAILURE: on_failure
-    - get_time:
-        do:
-          io.cloudslang.base.datetime.get_time:
-            - date_format: "${'''yyyy-MM-dd'T'hh:mm:ss'''}"
-            - future_minutes: null
-        publish:
-          - time_now: '${output}'
-        navigate:
-          - SUCCESS: schedule_update_workspace_flow
-          - FAILURE: on_failure
-    - schedule_update_workspace_flow:
-        do:
-          io.cloudslang.microfocus.rpa.central.scheduler.schedule_flow:
-            - name: "${'Update workspace of '+ username}"
-            - uuid: rpa.designer.rest.workspace.test.test_update_workspace
-            - start_date: '${time_now}'
-            - inputs: "${'\"username\" : \"%s\"' % username}"
-            - num_of_occurences: '1'
+          - FAILURE: update_workspace
+          - NOTHING_TO_UPDATE: update_workspace
+          - ALREADY_DEPLOYED: update_workspace
+          - SUCCESS: update_workspace
+    - update_workspace:
+        loop:
+          for: username in usernames
+          do:
+            io.cloudslang.microfocus.rpa.demo.sub_flows.update_workspace:
+              - username: '${username}'
+          break: []
         navigate:
           - FAILURE: on_failure
-          - SUCCESS: list_iterator
+          - SUCCESS: SUCCESS
   results:
     - SUCCESS
     - FAILURE
@@ -72,19 +51,13 @@ extensions:
       update_cp_from_github:
         x: 83
         'y': 113
-      list_iterator:
-        x: 413
-        'y': 117
+      update_workspace:
+        x: 417
+        'y': 115
         navigate:
-          3c3bf64e-2e4e-d380-e032-fdc8a48e3be7:
+          adcba9b7-13a4-d2f3-740b-5cb382ec4cf5:
             targetId: e7df2df0-c4b7-b88f-3639-1c7ccb6dafb1
-            port: NO_MORE
-      get_time:
-        x: 550
-        'y': 284
-      schedule_update_workspace_flow:
-        x: 315
-        'y': 287
+            port: SUCCESS
     results:
       SUCCESS:
         e7df2df0-c4b7-b88f-3639-1c7ccb6dafb1:
