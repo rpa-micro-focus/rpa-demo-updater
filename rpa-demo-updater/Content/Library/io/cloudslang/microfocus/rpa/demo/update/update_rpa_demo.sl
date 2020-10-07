@@ -28,7 +28,9 @@ flow:
     - update_2020_07_15:
         default: update 2020/07/15 - Update CPs; enable repetitive activity run in AOS
         private: true
-    - update_2020_10_07: 'update 2020/10/07 - Copy /etc/hosts file from RPA -> ROBOT1 VM; update CPs; update workspaces; generate ROI'
+    - update_2020_10_07:
+        default: 'update 2020/10/07 - Copy /etc/hosts file from RPA -> ROBOT1 VM; update CPs; update workspaces; generate ROI'
+        private: true
   workflow:
     - read_from_file:
         do:
