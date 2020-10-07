@@ -15,7 +15,7 @@ namespace: io.cloudslang.microfocus.rpa.demo.update.2020_02
 flow:
   name: update_2020_07_15
   inputs:
-    - github_repos: 'pe-pan/rpa-aos,pe-pan/rpa-sap,pe-pan/rpa-salesforce,pe-pan/rpa-robosoc,rpa-micro-focus/rpa-rpa'
+    - github_repos: 'pe-pan/rpa-aos,pe-pan/rpa-sap,pe-pan/rpa-salesforce,rpa-micro-focus/rpa-rpa'
     - usernames: 'aosdev,sapdev,sfdev,rpadev'
     - cp_folder: "C:\\\\Users\\\\Administrator\\\\Downloads\\\\demo-content-packs"
   workflow:
