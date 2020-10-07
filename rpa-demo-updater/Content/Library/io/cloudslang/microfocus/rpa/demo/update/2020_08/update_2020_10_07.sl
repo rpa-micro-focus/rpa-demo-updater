@@ -22,7 +22,9 @@ flow:
           - SUCCESS: update_rpa_demo_instance
     - update_rpa_demo_instance:
         do:
-          io.cloudslang.microfocus.rpa.demo.update_rpa_demo_instance: []
+          io.cloudslang.microfocus.rpa.demo.update_rpa_demo_instance:
+            - github_repos: 'rpa-micro-focus/rpa-microsoft-graph,rpa-micro-focus/cs-base-te-addon,rpa-micro-focus/rpa-demo,rpa-micro-focus/rpa-demo-updater,rpa-micro-focus/cs-microfocus-enterprise-server'
+            - usernames: 'admin,rpademo,rpaqa,addondev,addonqa,esdev'
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
