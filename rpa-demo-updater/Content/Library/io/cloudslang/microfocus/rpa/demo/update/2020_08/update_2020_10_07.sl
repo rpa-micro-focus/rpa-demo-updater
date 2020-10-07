@@ -1,6 +1,6 @@
 ########################################################################################################################
 #!!
-#! @description: RPA demo environment update from October/10/2020; 
+#! @description: RPA demo environment update from October/07/2020; 
 #!                 - copies /etc/hosts file from RPA VM to ROBOT1 VM
 #!                 - updates the CPs
 #!                 - updates the workspaces
