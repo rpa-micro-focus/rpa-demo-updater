@@ -4,6 +4,7 @@
 #!               - 2020/05/28: Generate ROI numbers
 #!               - 2020/06/10: Fix MF Enterprise Server service
 #!               - 2020/07/15: Update CPs; enable repetitive activity run in AOS
+#!               - 2020/10/07: Update CPs; update workspaces; generate ROI
 #!
 #! @input log_file: File keeping update log
 #! @input update_2020_05_28: Update from 2020/05/28
@@ -29,7 +30,7 @@ flow:
         default: update 2020/07/15 - Update CPs; enable repetitive activity run in AOS
         private: true
     - update_2020_10_07:
-        default: 'update 2020/10/07 - Copy /etc/hosts file from RPA -> ROBOT1 VM; update CPs; update workspaces; generate ROI'
+        default: update 2020/10/07 - update CPs; update workspaces; generate ROI
         private: true
   workflow:
     - read_from_file:
