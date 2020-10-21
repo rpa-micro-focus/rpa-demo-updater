@@ -26,7 +26,7 @@ flow:
               - cp_folder: '${cp_folder}'
           break: []
           publish:
-            - error: ''
+            - failure: ''
         navigate:
           - FAILURE: log_update_cp_error
           - NOTHING_TO_UPDATE: execute_update_workspace
@@ -59,41 +59,43 @@ flow:
                 '''}
         navigate:
           - FAILURE: log_generate_roi_error
-          - SUCCESS: has_errors
+          - SUCCESS: has_any_failure
     - log_update_cp_error:
         do:
           io.cloudslang.base.utils.do_nothing:
-            - error_in: '${error}'
+            - failure_in: '${failure}'
         publish:
-          - error: CP update has failed
+          - failure: CP update has failed
         navigate:
           - SUCCESS: execute_update_workspace
           - FAILURE: on_failure
     - log_update_ws_error:
         do:
           io.cloudslang.base.utils.do_nothing:
-            - error_in: '${error}'
+            - failure_in: '${failure}'
         publish:
-          - error: "${error_in+';Workspace update has failed'}"
+          - failure: "${('' if failure_in == '' else failure_in+',')+'Workspace update has failed'}"
         navigate:
           - SUCCESS: execute_generate_roi_numbers
           - FAILURE: on_failure
     - log_generate_roi_error:
         do:
           io.cloudslang.base.utils.do_nothing:
-            - error_in: '${error}'
+            - failure_in: '${failure}'
         publish:
-          - error: "${error_in+';Generate ROI numbers has failed'}"
+          - failure: "${('' if failure_in == '' else failure_in+',')+'Generate ROI numbers has failed'}"
         navigate:
-          - SUCCESS: has_errors
+          - SUCCESS: has_any_failure
           - FAILURE: on_failure
-    - has_errors:
+    - has_any_failure:
         do:
           io.cloudslang.base.utils.is_true:
-            - bool_value: '${str(len(error)>0)}'
+            - bool_value: '${str(len(failure)>0)}'
         navigate:
           - 'TRUE': FAILURE
           - 'FALSE': SUCCESS
+  outputs:
+    - failure: '${failure}'
   results:
     - FAILURE
     - SUCCESS
@@ -110,15 +112,15 @@ extensions:
         x: 552
         'y': 98
       log_update_cp_error:
-        x: 46
-        'y': 302
+        x: 44
+        'y': 317
       log_update_ws_error:
         x: 306
         'y': 315
       log_generate_roi_error:
         x: 550
         'y': 318
-      has_errors:
+      has_any_failure:
         x: 713
         'y': 204
         navigate:
