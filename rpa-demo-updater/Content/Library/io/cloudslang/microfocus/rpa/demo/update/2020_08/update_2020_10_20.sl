@@ -7,19 +7,6 @@ flow:
     - usernames: 'aosdev,sapdev,sfdev,admin,rpadev,rpademo,rpaqa,addondev,addonqa,esdev'
     - cp_folder: "C:\\\\Users\\\\Administrator\\\\Downloads\\\\demo-content-packs"
   workflow:
-    - execute_update_workspace:
-        loop:
-          for: username in usernames
-          do:
-            io.cloudslang.microfocus.rpa.central.execution.execute_flow:
-              - flow_uuid: io.cloudslang.microfocus.rpa.demo.sub_flows.update_workspace
-              - flow_inputs: "${'{\"username\": \"%s\"}' % username}"
-          break: []
-        navigate:
-          - SUCCESS: trigger_flow
-          - FAILURE_TIMED_OUT: log_update_ws_error
-          - FAILURE_UNCOMPLETED: update_cp_from_github
-          - FAILURE: log_update_ws_error
     - update_cp_from_github:
         loop:
           for: github_repo in github_repos
@@ -35,6 +22,19 @@ flow:
           - NOTHING_TO_UPDATE: execute_update_workspace
           - ALREADY_DEPLOYED: execute_update_workspace
           - SUCCESS: execute_update_workspace
+    - execute_update_workspace:
+        loop:
+          for: username in usernames
+          do:
+            io.cloudslang.microfocus.rpa.central.execution.execute_flow:
+              - flow_uuid: io.cloudslang.microfocus.rpa.demo.sub_flows.update_workspace
+              - flow_inputs: "${'{\"username\": \"%s\"}' % username}"
+          break: []
+        navigate:
+          - SUCCESS: trigger_flow
+          - FAILURE_TIMED_OUT: log_update_ws_error
+          - FAILURE_UNCOMPLETED: log_update_ws_error
+          - FAILURE: log_update_ws_error
     - trigger_flow:
         do:
           io.cloudslang.microfocus.rpa.central.execution.trigger_flow:
@@ -89,12 +89,12 @@ flow:
 extensions:
   graph:
     steps:
-      update_cp_from_github:
-        x: 43
-        'y': 91
       execute_update_workspace:
         x: 309
         'y': 96
+      update_cp_from_github:
+        x: 43
+        'y': 91
       trigger_flow:
         x: 552
         'y': 98
