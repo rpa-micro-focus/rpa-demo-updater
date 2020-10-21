@@ -1,14 +1,19 @@
 ########################################################################################################################
 #!!
 #! @description: RPA demo environment update from May/28/2020; 
-#!                 - delete an unnecessary file in C:\Temp folder
-#!                 - generates ROI numbers
+#!               - delete an unnecessary file in C:\Temp folder
+#!               - generates ROI numbers
+#!
+#! @input log_message: Update from 2020/05/28
 #!!#
 ########################################################################################################################
 namespace: io.cloudslang.microfocus.rpa.demo.update.2020_02
 flow:
   name: update_2020_05_08
   inputs:
+    - log_message:
+        default: update 2020/05/28 - Generate ROI
+        private: false
     - file_to_remove:
         default: "C:\\\\Temp\\\\test.txt"
         private: true

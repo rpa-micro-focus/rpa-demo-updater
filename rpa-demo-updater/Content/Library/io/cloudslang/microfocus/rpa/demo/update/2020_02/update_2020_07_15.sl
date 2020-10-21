@@ -6,6 +6,7 @@
 #!               - Pulls changes from GitHub
 #!               - Updates binaries if present in GitHub
 #!
+#! @input log_message: Update from 2020/07/15
 #! @input github_repos: Repositories where to download the newest CPs from and deploy them to Central
 #! @input usernames: Usernames whose workspaces to be updated (changes pulled out of GitHub repo; binaries inside of CPs updated if present)
 #! @input cp_folder: Downloaded CPs will be stored in this folder
@@ -15,6 +16,7 @@ namespace: io.cloudslang.microfocus.rpa.demo.update.2020_02
 flow:
   name: update_2020_07_15
   inputs:
+    - log_message: update 2020/07/15 - Update CPs; enable repetitive activity run in AOS
     - github_repos: 'pe-pan/rpa-aos,pe-pan/rpa-sap,pe-pan/rpa-salesforce,rpa-micro-focus/rpa-rpa'
     - usernames: 'aosdev,sapdev,sfdev,rpadev'
     - cp_folder: "C:\\\\Users\\\\Administrator\\\\Downloads\\\\demo-content-packs"

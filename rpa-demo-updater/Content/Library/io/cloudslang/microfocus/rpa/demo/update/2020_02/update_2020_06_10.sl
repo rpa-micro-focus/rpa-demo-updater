@@ -3,12 +3,17 @@
 #! @description: RPA demo environment update from June/10/2020:
 #!               - fixes MF Enterprise Server service
 #!               - stops MF Enterprise Server service
+#!
+#! @input log_message: Update from 2020/06/10
 #!!#
 ########################################################################################################################
 namespace: io.cloudslang.microfocus.rpa.demo.update.2020_02
 flow:
   name: update_2020_06_10
   inputs:
+    - log_message:
+        default: update 2020/06/10 - Fix MF Enterprise Server service
+        private: false
     - service_url: 'http://rpa.mf-te.com:86/'
     - service_name: mf_CCITCP2
   workflow:

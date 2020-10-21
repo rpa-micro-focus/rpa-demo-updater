@@ -1,5 +1,9 @@
 ########################################################################################################################
 #!!
+#! @description: Retrieves the details of inputs of the given flow.
+#!
+#! @input flow_uuid: The flow to obtain the input details
+#!
 #! @output flow_inputs_json: JSON document describing the flow inputs
 #!!#
 ########################################################################################################################
@@ -7,7 +11,7 @@ namespace: io.cloudslang.microfocus.rpa.demo.update._operations
 flow:
   name: get_flow_inputs
   inputs:
-    - flow_uuid: io.cloudslang.microfocus.rpa.demo.update.download_latest_update
+    - flow_uuid
   workflow:
     - central_http_action:
         do:

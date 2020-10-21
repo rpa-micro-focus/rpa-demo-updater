@@ -1,8 +1,18 @@
+########################################################################################################################
+#!!
+#! @input log_message: Update from 2020/10/20
+#! @input github_repos: Which CPs to be downloaded into Central; given in the dependencies order (so newly added content has its dependencies already loaded)
+#! @input usernames: Which workspaces to be updated
+#! @input cp_folder: Where to download he CPs
+#!!#
+########################################################################################################################
 namespace: io.cloudslang.microfocus.rpa.demo.update.2020_08
 flow:
   name: update_2020_10_20
   inputs:
-    - log_message: update 2020/10/20 - Update CPs; update workspaces; generate ROI
+    - log_message:
+        default: update 2020/10/20 - Update CPs; update workspaces; generate ROI
+        private: false
     - github_repos: 'rpa-micro-focus/cs-base-te-addon,rpa-micro-focus/rpa-rpa,rpa-micro-focus/rpa-demo,rpa-micro-focus/rpa-microsoft-graph,rpa-micro-focus/cs-microfocus-enterprise-server,pe-pan/rpa-aos,pe-pan/rpa-sap,pe-pan/rpa-salesforce'
     - usernames: 'aosdev,sapdev,sfdev,admin,rpadev,rpademo,rpaqa,addondev,addonqa,esdev'
     - cp_folder: "C:\\\\Users\\\\Administrator\\\\Downloads\\\\demo-content-packs"
@@ -28,14 +38,15 @@ flow:
           do:
             io.cloudslang.microfocus.rpa.central.execution.execute_flow:
               - flow_uuid: io.cloudslang.microfocus.rpa.demo.sub_flows.update_workspace
+              - flow_run_name: "${'update workspace of '+username}"
               - flow_inputs: "${'{\"username\": \"%s\"}' % username}"
           break: []
         navigate:
-          - SUCCESS: trigger_flow
+          - SUCCESS: execute_generate_roi_numbers
           - FAILURE_TIMED_OUT: log_update_ws_error
           - FAILURE_UNCOMPLETED: log_update_ws_error
           - FAILURE: log_update_ws_error
-    - trigger_flow:
+    - execute_generate_roi_numbers:
         do:
           io.cloudslang.microfocus.rpa.central.execution.trigger_flow:
             - flow_uuid: io.cloudslang.microfocus.rpa.demo.generate_roi_numbers
@@ -65,7 +76,7 @@ flow:
         publish:
           - error: "${error_in+';Workspace update has failed'}"
         navigate:
-          - SUCCESS: trigger_flow
+          - SUCCESS: execute_generate_roi_numbers
           - FAILURE: on_failure
     - log_generate_roi_error:
         do:
@@ -89,13 +100,13 @@ flow:
 extensions:
   graph:
     steps:
+      update_cp_from_github:
+        x: 46
+        'y': 90
       execute_update_workspace:
         x: 309
         'y': 96
-      update_cp_from_github:
-        x: 43
-        'y': 91
-      trigger_flow:
+      execute_generate_roi_numbers:
         x: 552
         'y': 98
       log_update_cp_error:
