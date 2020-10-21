@@ -1,6 +1,7 @@
 ########################################################################################################################
 #!!
 #! @description: Retrieves the details of inputs of the given flow.
+#!               TODO: Replace this flow with io.cloudslang.microfocus.rpa.central.library.get_flow_inputs once cs-microfocus-rpa:1.1.2 is part of Central.
 #!
 #! @input flow_uuid: The flow to obtain the input details
 #!
