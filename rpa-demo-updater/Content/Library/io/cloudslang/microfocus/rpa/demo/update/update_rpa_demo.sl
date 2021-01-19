@@ -9,10 +9,13 @@ flow:
   name: update_rpa_demo
   workflow:
     - update_cp_from_github:
-        do:
-          io.cloudslang.microfocus.rpa.central.content-pack.update_cp_from_github:
-            - github_repo: rpa-micro-focus/rpa-rpa
-        publish: []
+        loop:
+          for: "github_repo in 'rpa-micro-focus/cs-base-te-addon,rpa-micro-focus/rpa-rpa'"
+          do:
+            io.cloudslang.microfocus.rpa.central.content-pack.update_cp_from_github:
+              - github_repo: '${github_repo}'
+          break: []
+          publish: []
         navigate:
           - FAILURE: on_failure
           - NOTHING_TO_UPDATE: trigger_flow
@@ -31,6 +34,9 @@ flow:
 extensions:
   graph:
     steps:
+      update_cp_from_github:
+        x: 79
+        'y': 80
       trigger_flow:
         x: 336
         'y': 75
@@ -38,9 +44,6 @@ extensions:
           633ec7d8-b935-d2e5-ef8f-a539f78840d1:
             targetId: a571d925-b136-c842-5495-3ffbb8f3af8c
             port: SUCCESS
-      update_cp_from_github:
-        x: 79
-        'y': 80
     results:
       SUCCESS:
         a571d925-b136-c842-5495-3ffbb8f3af8c:
