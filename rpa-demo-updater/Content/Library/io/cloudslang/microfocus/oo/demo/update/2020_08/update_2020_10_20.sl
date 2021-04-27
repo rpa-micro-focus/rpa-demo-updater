@@ -6,7 +6,7 @@
 #! @input cp_folder: Where to download he CPs
 #!!#
 ########################################################################################################################
-namespace: io.cloudslang.microfocus.rpa.demo.update.2020_08
+namespace: io.cloudslang.microfocus.oo.demo.update.2020_08
 flow:
   name: update_2020_10_20
   inputs:
@@ -21,7 +21,7 @@ flow:
         loop:
           for: github_repo in github_repos
           do:
-            io.cloudslang.microfocus.rpa.central.content-pack.update_cp_from_github:
+            io.cloudslang.microfocus.oo.central.content-pack.update_cp_from_github:
               - github_repo: '${github_repo}'
               - cp_folder: '${cp_folder}'
           break: []
@@ -36,8 +36,8 @@ flow:
         loop:
           for: username in usernames
           do:
-            io.cloudslang.microfocus.rpa.central.execution.execute_flow:
-              - flow_uuid: io.cloudslang.microfocus.rpa.demo.sub_flows.update_workspace
+            io.cloudslang.microfocus.oo.central.execution.execute_flow:
+              - flow_uuid: io.cloudslang.microfocus.oo.demo.sub_flows.update_workspace
               - flow_run_name: "${'update workspace of '+username}"
               - flow_inputs: "${'{\"username\": \"%s\"}' % username}"
           break: []
@@ -48,8 +48,8 @@ flow:
           - FAILURE: log_update_ws_error
     - execute_generate_roi_numbers:
         do:
-          io.cloudslang.microfocus.rpa.central.execution.trigger_flow:
-            - flow_uuid: io.cloudslang.microfocus.rpa.demo.generate_roi_numbers
+          io.cloudslang.microfocus.oo.central.execution.trigger_flow:
+            - flow_uuid: io.cloudslang.microfocus.oo.demo.generate_roi_numbers
             - flow_inputs: |-
                 ${'''
                 {

@@ -12,7 +12,7 @@
 #! @input cp_folder: Downloaded CPs will be stored in this folder
 #!!#
 ########################################################################################################################
-namespace: io.cloudslang.microfocus.rpa.demo.update.2020_02
+namespace: io.cloudslang.microfocus.oo.demo.update.2020_02
 flow:
   name: update_2020_07_15
   inputs:
@@ -25,7 +25,7 @@ flow:
         loop:
           for: github_repo in github_repos
           do:
-            io.cloudslang.microfocus.rpa.central.content-pack.update_cp_from_github:
+            io.cloudslang.microfocus.oo.central.content-pack.update_cp_from_github:
               - github_repo: '${github_repo}'
               - cp_folder: '${cp_folder}'
           break: []
@@ -38,7 +38,7 @@ flow:
         loop:
           for: username in usernames
           do:
-            io.cloudslang.microfocus.rpa.demo.sub_flows.update_workspace:
+            io.cloudslang.microfocus.oo.demo.sub_flows.update_workspace:
               - username: '${username}'
           break: []
         navigate:

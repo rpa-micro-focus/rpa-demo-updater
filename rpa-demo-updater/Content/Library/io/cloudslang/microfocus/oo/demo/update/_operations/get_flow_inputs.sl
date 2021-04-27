@@ -1,14 +1,14 @@
 ########################################################################################################################
 #!!
 #! @description: Retrieves the details of inputs of the given flow.
-#!               TODO: Replace this flow with io.cloudslang.microfocus.rpa.central.library.get_flow_inputs once cs-microfocus-rpa:1.1.2 is part of Central.
+#!               TODO: Replace this flow with io.cloudslang.microfocus.oo.central.library.get_flow_inputs once cs-microfocus-rpa:1.1.2 is part of Central.
 #!
 #! @input flow_uuid: The flow to obtain the input details
 #!
 #! @output flow_inputs_json: JSON document describing the flow inputs
 #!!#
 ########################################################################################################################
-namespace: io.cloudslang.microfocus.rpa.demo.update._operations
+namespace: io.cloudslang.microfocus.oo.demo.update._operations
 flow:
   name: get_flow_inputs
   inputs:
@@ -16,7 +16,7 @@ flow:
   workflow:
     - central_http_action:
         do:
-          io.cloudslang.microfocus.rpa.central._operations.central_http_action:
+          io.cloudslang.microfocus.oo.central._operations.central_http_action:
             - url: "${'/rest/latest/flows/%s/inputs' % flow_uuid}"
             - method: GET
         publish:

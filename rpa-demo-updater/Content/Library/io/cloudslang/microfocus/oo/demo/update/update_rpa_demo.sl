@@ -1,10 +1,10 @@
 ########################################################################################################################
 #!!
 #! @description: Downloads cs-microfocus-rpa CP and proceeds with the RPA demo environment update. This updated CP is essential for the update engine to work.
-#!               TODO: Replace this flow with io.cloudslang.microfocus.rpa.demo.update._operations.update_rpa_demo_carry_on once cs-microfocus-rpa:1.1.2 is part of Central (flow_run_id is given by execute_flow).
+#!               TODO: Replace this flow with io.cloudslang.microfocus.oo.demo.update._operations.update_rpa_demo_carry_on once cs-microfocus-rpa:1.1.2 is part of Central (flow_run_id is given by execute_flow).
 #!!#
 ########################################################################################################################
-namespace: io.cloudslang.microfocus.rpa.demo.update
+namespace: io.cloudslang.microfocus.oo.demo.update
 flow:
   name: update_rpa_demo
   workflow:
@@ -12,7 +12,7 @@ flow:
         loop:
           for: "github_repo in 'rpa-micro-focus/cs-base-te-addon,rpa-micro-focus/rpa-rpa'"
           do:
-            io.cloudslang.microfocus.rpa.central.content-pack.update_cp_from_github:
+            io.cloudslang.microfocus.oo.central.content-pack.update_cp_from_github:
               - github_repo: '${github_repo}'
           break: []
           publish: []
@@ -23,8 +23,8 @@ flow:
           - SUCCESS: trigger_flow
     - trigger_flow:
         do:
-          io.cloudslang.microfocus.rpa.central.execution.trigger_flow:
-            - flow_uuid: io.cloudslang.microfocus.rpa.demo.update._operations.update_rpa_demo_carry_on
+          io.cloudslang.microfocus.oo.central.execution.trigger_flow:
+            - flow_uuid: io.cloudslang.microfocus.oo.demo.update._operations.update_rpa_demo_carry_on
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS

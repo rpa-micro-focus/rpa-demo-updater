@@ -6,7 +6,7 @@
 #! @input scenario_json: JSON document describing Salesforce SSX scenario
 #!!#
 ########################################################################################################################
-namespace: io.cloudslang.microfocus.rpa.demo.update.2020_08
+namespace: io.cloudslang.microfocus.oo.demo.update.2020_08
 flow:
   name: update_2020_12_19
   inputs:
@@ -118,7 +118,7 @@ flow:
   workflow:
     - get_token:
         do:
-          io.cloudslang.microfocus.rpa.ssx.authenticate.get_token: []
+          io.cloudslang.microfocus.oo.ssx.authenticate.get_token: []
         publish:
           - token
         navigate:
@@ -126,7 +126,7 @@ flow:
           - SUCCESS: update_scenario
     - update_scenario:
         do:
-          io.cloudslang.microfocus.rpa.ssx.scenario.update_scenario:
+          io.cloudslang.microfocus.oo.ssx.scenario.update_scenario:
             - token: '${token}'
             - scenario_id: '${scenario_id}'
             - category_id: '${category_id}'

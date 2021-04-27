@@ -8,19 +8,19 @@
 #! @input disable_schedule: If given, this schedule will be disabled once the updater gets triggered
 #!!#
 ########################################################################################################################
-namespace: io.cloudslang.microfocus.rpa.demo.update
+namespace: io.cloudslang.microfocus.oo.demo.update
 flow:
   name: download_latest_update
   inputs:
     - github_repo: rpa-micro-focus/rpa-demo-updater
-    - updater_flow: io.cloudslang.microfocus.rpa.demo.update.update_rpa_demo
+    - updater_flow: io.cloudslang.microfocus.oo.demo.update.update_rpa_demo
     - disable_schedule:
         default: download_latest_update
         required: false
   workflow:
     - update_cp_from_github:
         do:
-          io.cloudslang.microfocus.rpa.central.content-pack.update_cp_from_github:
+          io.cloudslang.microfocus.oo.central.content-pack.update_cp_from_github:
             - github_repo: '${github_repo}'
         navigate:
           - FAILURE: on_failure
@@ -29,7 +29,7 @@ flow:
           - SUCCESS: trigger_flow
     - trigger_flow:
         do:
-          io.cloudslang.microfocus.rpa.central.execution.trigger_flow:
+          io.cloudslang.microfocus.oo.central.execution.trigger_flow:
             - flow_uuid: '${updater_flow}'
         navigate:
           - FAILURE: on_failure
@@ -38,7 +38,7 @@ flow:
         loop:
           for: schedule_id in eval(schedule_ids)
           do:
-            io.cloudslang.microfocus.rpa.central.scheduler.enable_schedule:
+            io.cloudslang.microfocus.oo.central.scheduler.enable_schedule:
               - schedule_id: '${schedule_id}'
               - enabled: 'false'
           break:
@@ -48,7 +48,7 @@ flow:
           - SUCCESS: SUCCESS
     - filter_schedules:
         do:
-          io.cloudslang.microfocus.rpa.central.scheduler.filter_schedules:
+          io.cloudslang.microfocus.oo.central.scheduler.filter_schedules:
             - filter_name: flowScheduleName
             - filter_value: "${\"'%s'\" % disable_schedule}"
         publish:

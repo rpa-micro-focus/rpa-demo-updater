@@ -8,7 +8,7 @@
 #! @output failure: Cause of the failure if the update fails
 #!!#
 ########################################################################################################################
-namespace: io.cloudslang.microfocus.rpa.demo.update._operations
+namespace: io.cloudslang.microfocus.oo.demo.update._operations
 flow:
   name: update_rpa_demo_carry_on
   inputs:
@@ -28,7 +28,7 @@ flow:
           - FAILURE: on_failure
     - get_flows:
         do:
-          io.cloudslang.microfocus.rpa.central.library.get_flows:
+          io.cloudslang.microfocus.oo.central.library.get_flows:
             - path: '${update_folder}'
         publish:
           - flows_json
@@ -76,7 +76,7 @@ flow:
           - 'FALSE': execute_flow
     - execute_flow:
         do:
-          io.cloudslang.microfocus.rpa.central.execution.execute_flow:
+          io.cloudslang.microfocus.oo.central.execution.execute_flow:
             - flow_uuid: '${flow_id}'
         navigate:
           - SUCCESS: log_update
@@ -85,7 +85,7 @@ flow:
           - FAILURE: add_failure
     - log_update:
         do:
-          io.cloudslang.microfocus.rpa.demo.update._operations.log_update:
+          io.cloudslang.microfocus.oo.demo.update._operations.log_update:
             - log_file: '${log_file}'
             - update_message: '${log_message}'
         publish:
@@ -119,7 +119,7 @@ flow:
           - 'FALSE': SUCCESS
     - get_flow_inputs:
         do:
-          io.cloudslang.microfocus.rpa.demo.update._operations.get_flow_inputs:
+          io.cloudslang.microfocus.oo.demo.update._operations.get_flow_inputs:
             - flow_uuid: '${flow_id}'
         publish:
           - flow_inputs_json

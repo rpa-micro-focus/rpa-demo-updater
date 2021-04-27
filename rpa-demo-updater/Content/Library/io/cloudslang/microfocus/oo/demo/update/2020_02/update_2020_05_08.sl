@@ -7,7 +7,7 @@
 #! @input log_message: Update from 2020/05/28
 #!!#
 ########################################################################################################################
-namespace: io.cloudslang.microfocus.rpa.demo.update.2020_02
+namespace: io.cloudslang.microfocus.oo.demo.update.2020_02
 flow:
   name: update_2020_05_08
   inputs:
@@ -27,7 +27,7 @@ flow:
           - FAILURE: generate_roi_numbers
     - generate_roi_numbers:
         do:
-          io.cloudslang.microfocus.rpa.demo.generate_roi_numbers:
+          io.cloudslang.microfocus.oo.demo.generate_roi_numbers:
             - num_of_occurences_range: 1-10
             - roi_range: 5-20
         navigate:

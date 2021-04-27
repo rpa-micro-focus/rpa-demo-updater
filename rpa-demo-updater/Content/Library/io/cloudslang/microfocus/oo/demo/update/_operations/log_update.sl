@@ -1,4 +1,4 @@
-namespace: io.cloudslang.microfocus.rpa.demo.update._operations
+namespace: io.cloudslang.microfocus.oo.demo.update._operations
 flow:
   name: log_update
   inputs:
